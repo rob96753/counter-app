@@ -38,7 +38,7 @@ class Counter extends Component {
           onClick={() => onDelete(counter.id)}
         />
 
-        <Liked liked={counter} onClick={() => onLiked(counter)} />
+        <Liked counter={counter} onLiked={onLiked} />
       </div>
     );
   }

@@ -1,22 +1,18 @@
 import React, { Component } from "react";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
-class Liked extends Component {
-  render() {
-    const { counter } = this.props;
-    console.log("Counter: ", counter);
-    /*const { liked } = this.props.counter;
-    console.log("Liked: ", liked);*/
-    return (
-      <FontAwesomeIcon
-        className="ml-4 mt-2"
-        icon={faHeart}
-        //onClick={() => onLiked(counter.id)}
-      />
-    );
-  }
-}
+const Liked = (props) => {
+  const { counter, onLiked } = props;
+  const { liked } = counter;
+  const classes = liked ? "ml-4 mt-2 text-danger" : "ml-4 mt-2 text-muted";
+  return (
+    <FontAwesomeIcon
+      className={classes}
+      icon={faHeart}
+      onClick={() => onLiked(counter)}
+    />
+  );
+};
 
 export default Liked;
