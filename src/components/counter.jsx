@@ -6,6 +6,7 @@ import {
   faMinus,
   faPlusSquare,
 } from "@fortawesome/free-solid-svg-icons";
+import Liked from "./common/liked";
 
 class Counter extends Component {
   componentDidUpdate(prevProps, prevState) {
@@ -17,7 +18,7 @@ class Counter extends Component {
   componentWillUnmount() {}
 
   render() {
-    const { counter, onIncrement, onDecrement, onDelete } = this.props;
+    const { counter, onIncrement, onDecrement, onDelete, onLiked } = this.props;
     return (
       <div>
         <span className="badge badge-primary m-2">{this.formatCount()}</span>
@@ -26,7 +27,6 @@ class Counter extends Component {
           className={counter.value > 0 ? "ml-4 mt-2" : "ml-1 mt-2"}
           icon={faPlus}
         />
-
         <FontAwesomeIcon
           onClick={() => onDecrement(counter)}
           className="ml-4 mt-2"
@@ -37,6 +37,8 @@ class Counter extends Component {
           icon={faTrash}
           onClick={() => onDelete(counter.id)}
         />
+
+        <Liked liked={counter} onClick={() => onLiked(counter)} />
       </div>
     );
   }

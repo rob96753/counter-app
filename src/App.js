@@ -10,11 +10,11 @@ import { faTrash, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 class App extends Component {
   state = {
     counters: [
-      { id: 1, value: 4 },
-      { id: 2, value: 3 },
-      { id: 3, value: 2 },
-      { id: 4, value: 1 },
-      { id: 5, value: 5 },
+      { id: 1, value: 4, liked: false },
+      { id: 2, value: 3, liked: false },
+      { id: 3, value: 2, liked: false },
+      { id: 4, value: 1, liked: false },
+      { id: 5, value: 5, liked: false },
     ],
   };
 
@@ -33,6 +33,9 @@ class App extends Component {
     const index = counters.indexOf(counter);
     counters[index] = { ...counter };
     counters[index].value++;
+    if (counters[index].value > 0) {
+      counters[index].disabled = false;
+    }
     this.setState({ counters });
   };
 
@@ -42,8 +45,18 @@ class App extends Component {
     if (counters[index].value > 0) {
       counters[index] = { ...counter };
       counters[index].value--;
+
       this.setState({ counters });
+    } else {
+      counters[index].disabled = true;
     }
+  };
+
+  handleLiked = (counter) => {
+    const counters = [...this.state.counters];
+    const index = counters.indexOf(counter);
+    counters[index].liked = !counters[index].liked;
+    this.setState({ counters });
   };
 
   render() {
@@ -59,6 +72,7 @@ class App extends Component {
             onIncrement={this.handleIncrement}
             onDecrement={this.handleDecrement}
             onDelete={this.handleDelete}
+            onLiked={this.handleLiked}
             counters={this.state.counters}
           />
         </main>
